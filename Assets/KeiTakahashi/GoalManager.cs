@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using DG.Tweening; // ★DOTweenの魔法を使う
+using DG.Tweening; // ★DOTweenを使うよ！
 
 public class GoalManager : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class GoalManager : MonoBehaviour
 
     private bool isGoal = false;
 
-    // ★プレイヤーが「ゴールエリア」に入った瞬間に自動で実行される呪文
+    // プレイヤーがゴールに入った瞬間に自動で実行される呪文
     private void OnTriggerEnter(Collider other)
     {
         // まだゴールしていなくて、触った相手が「Player（プレイヤー）」だったら
@@ -30,12 +30,15 @@ public class GoalManager : MonoBehaviour
             // ① 隠しておいた文字を画面に表示する！
             goalTextObject.SetActive(true);
 
-            // ② 【DOTweenの魔法】大きさをいったん「0」にする
+            // ② 大きさをいったん「0」にする
             goalTextObject.transform.localScale = Vector3.zero;
 
-            // ③ 0.5秒かけて「1.2倍」に大きくして、最後に「1倍」でピタッと止める！
-            // SetEase(Ease.OutBack) でポヨンとした気持ちいい動きになります
-            goalTextObject.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBack);
+            // ③ 【超重要！】0.5秒かけて1倍に大きくする
+            // ★うしろに「.SetUpdate(true)」をつけるのがポイント！
+            // これをつけると、ゲームの時間を止めても、このアニメーションだけはフリーズせずに動いてくれます！
+            goalTextObject.transform.DOScale(1f, 0.5f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true);
         }
 
         // ④ ゴールしたのでゲームの動きを一時停止する
