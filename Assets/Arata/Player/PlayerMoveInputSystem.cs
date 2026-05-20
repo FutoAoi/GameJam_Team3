@@ -3,7 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMoveInputSystem : MonoBehaviour
 {
+    [Header("通常移動速度")]
     public float moveSpeed = 5f;
+
+    [Header("Shiftダッシュ速度")]
     public float dashSpeed = 10f;
 
     private Rigidbody rb;
@@ -13,7 +16,6 @@ public class PlayerMoveInputSystem : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
     }
 
     void FixedUpdate()
@@ -22,7 +24,11 @@ public class PlayerMoveInputSystem : MonoBehaviour
 
         float speed = isDash ? dashSpeed : moveSpeed;
 
-        rb.linearVelocity = new Vector3(move.x*speed,0,move.z*speed);
+        rb.linearVelocity = new Vector3(
+            move.x * speed,
+            rb.linearVelocity.y,
+            move.z * speed
+        );
     }
 
     public void OnMove(InputAction.CallbackContext context)
