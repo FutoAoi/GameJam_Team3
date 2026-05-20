@@ -24,12 +24,13 @@ public class PlayerInvisibleChecker : MonoBehaviour
 
         // 太いRay
         if (Physics.SphereCast(
-            transform.position,
+            transform.position + Vector3.up,
             rayRadius,
             Vector3.down,
             out hit,
             rayDistance))
         {
+            Debug.Log("a");
             RandomInvisibleFloor3D area =
                 hit.collider.GetComponent<RandomInvisibleFloor3D>();
 
@@ -60,8 +61,8 @@ public class PlayerInvisibleChecker : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        Vector3 start = transform.position;
-        Vector3 end = transform.position + Vector3.down * rayDistance;
+        Vector3 start = transform.position + Vector3.up;
+        Vector3 end = transform.position  * rayDistance;
 
         Gizmos.DrawWireSphere(start, rayRadius);
         Gizmos.DrawWireSphere(end, rayRadius);
