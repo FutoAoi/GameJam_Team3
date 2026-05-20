@@ -30,7 +30,7 @@ public class PlayerInvisibleChecker : MonoBehaviour
             out hit,
             rayDistance))
         {
-            Debug.Log("a");
+            
             RandomInvisibleFloor3D area =
                 hit.collider.GetComponent<RandomInvisibleFloor3D>();
 
