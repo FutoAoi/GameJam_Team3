@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class SceneMove : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class SceneMove : MonoBehaviour
 
     [Header("クレジットパネル")]
     public GameObject creditPanel;
+
+    [Header("オプションパネル")]
+    public GameObject optionPanel;
 
     // フェード移行したか記録
     private static bool isFade = false;
@@ -48,6 +52,7 @@ public class SceneMove : MonoBehaviour
         });
     }
 
+    
     // クレジット表示
     public void PopupPanel()
     {
@@ -69,6 +74,30 @@ public class SceneMove : MonoBehaviour
             .OnComplete(() =>
             {
                 creditPanel.SetActive(false);
+            });
+    }
+
+    //オプションを表示
+    public void PopupOptionPanel()
+    {
+        optionPanel.SetActive(true);
+
+        // 最初小さくする
+        optionPanel.transform.localScale = Vector3.zero;
+
+        // 拡大アニメーション
+        optionPanel.transform.DOScale(1f, 0.3f)
+            .SetEase(Ease.OutBack);
+    }
+
+    // クレジットを閉じる
+    public void CloseOptionPanel()
+    {
+        // 縮小してから消す
+        optionPanel.transform.DOScale(0f, 0.2f)
+            .OnComplete(() =>
+            {
+                optionPanel.SetActive(false);
             });
     }
 }
