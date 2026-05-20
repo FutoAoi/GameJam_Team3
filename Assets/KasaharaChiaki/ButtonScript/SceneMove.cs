@@ -11,22 +11,36 @@ public class SceneMove : MonoBehaviour
     [Header("フェード時間")]
     public float fadeTime = 1f;
 
+    // フェード移行したか記録
+    private static bool isFade = false;
+
     private void Start()
     {
-        // シーン開始時は黒から始める
-        fadeImage.color = new Color(0, 0, 0, 1);
+        // フェード移行後だけフェードイン
+        if (isFade)
+        {
+            fadeImage.color = new Color(0, 0, 0, 1);
 
-        // フェードイン
-        fadeImage.DOFade(0f, fadeTime);
+            fadeImage.DOFade(0f, fadeTime);
+
+            isFade = false;
+        }
+        else
+        {
+            // 通常開始時は透明
+            fadeImage.color = new Color(0, 0, 0, 0);
+        }
     }
 
     public void StartGame(string loadScene)
     {
+        // フェード移行フラグON
+        isFade = true;
+
         // フェードアウト
         fadeImage.DOFade(1f, fadeTime)
         .OnComplete(() =>
         {
-            // シーン移動
             SceneManager.LoadScene(loadScene);
         });
     }
