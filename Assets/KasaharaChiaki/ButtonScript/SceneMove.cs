@@ -13,9 +13,10 @@ public class SceneMove : MonoBehaviour
 
     private void Start()
     {
-        // シーン開始時にフェードイン
+        // シーン開始時は黒から始める
         fadeImage.color = new Color(0, 0, 0, 1);
 
+        // フェードイン
         fadeImage.DOFade(0f, fadeTime);
     }
 
