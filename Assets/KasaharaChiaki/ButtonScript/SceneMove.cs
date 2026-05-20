@@ -11,6 +11,9 @@ public class SceneMove : MonoBehaviour
     [Header("フェード時間")]
     public float fadeTime = 1f;
 
+    [Header("クレジットパネル")]
+    public GameObject creditPanel;
+
     // フェード移行したか記録
     private static bool isFade = false;
 
@@ -43,5 +46,29 @@ public class SceneMove : MonoBehaviour
         {
             SceneManager.LoadScene(loadScene);
         });
+    }
+
+    // クレジット表示
+    public void PopupPanel()
+    {
+        creditPanel.SetActive(true);
+
+        // 最初小さくする
+        creditPanel.transform.localScale = Vector3.zero;
+
+        // 拡大アニメーション
+        creditPanel.transform.DOScale(1f, 0.3f)
+            .SetEase(Ease.OutBack);
+    }
+
+    // クレジットを閉じる
+    public void ClosePanel()
+    {
+        // 縮小してから消す
+        creditPanel.transform.DOScale(0f, 0.2f)
+            .OnComplete(() =>
+            {
+                creditPanel.SetActive(false);
+            });
     }
 }
