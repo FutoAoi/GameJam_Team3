@@ -13,6 +13,7 @@ public class PlayerMoveInputSystem : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     void FixedUpdate()
@@ -21,7 +22,7 @@ public class PlayerMoveInputSystem : MonoBehaviour
 
         float speed = isDash ? dashSpeed : moveSpeed;
 
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector3(move.x*speed,0,move.z*speed);
     }
 
     public void OnMove(InputAction.CallbackContext context)
