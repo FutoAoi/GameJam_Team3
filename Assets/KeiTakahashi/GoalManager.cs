@@ -6,6 +6,7 @@ public class GoalManager : MonoBehaviour
 {
     // 画面の「GoalText」をハメ込むための箱
     public GameObject goalTextObject;
+    [SerializeField] private SceneMove _sceneMove;
 
     private bool isGoal = false;
 
@@ -38,10 +39,8 @@ public class GoalManager : MonoBehaviour
             // これをつけると、ゲームの時間を止めても、このアニメーションだけはフリーズせずに動いてくれます！
             goalTextObject.transform.DOScale(1f, 0.5f)
                 .SetEase(Ease.OutBack)
-                .SetUpdate(true);
+                .SetUpdate(true).OnComplete(() => _sceneMove.StartGame("ResultScene"));
         }
 
-        // ④ ゴールしたのでゲームの動きを一時停止する
-        Time.timeScale = 0f;
     }
 }
