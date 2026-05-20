@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 534958314}
   - component: {fileID: 534958313}
   - component: {fileID: 534958316}
+  - component: {fileID: 534958317}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -205,13 +206,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534958312}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.13315414, y: -0, z: -0, w: 0.9910954}
+  m_LocalPosition: {x: 0, y: 2.608, z: -10.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.304, y: 0, z: 0}
 --- !u!114 &534958316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,23 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &534958317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534958312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ec45d8cb91d3c4eaca651eb8c42a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2132754279}
+  minX: -3
+  maxX: 3
+  zOffset: -5
+  smoothSpeed: 0.1
 --- !u!1 &598914666
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDisappearTime: 1
-  maxDisappearTime: 30
+  maxDisappearTime: 20
   minInvisibleTime: 8
   maxInvisibleTime: 8
   IsInvisible: 0
@@ -525,8 +543,8 @@ Transform:
   m_GameObject: {fileID: 768737958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.38639897, y: -0.8, z: -5.9390087}
-  m_LocalScale: {x: 2, y: 1, z: 4}
+  m_LocalPosition: {x: -0.38639897, y: -0.8, z: -0.79}
+  m_LocalScale: {x: 2, y: 1, z: 16.438}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -547,6 +565,7 @@ GameObject:
   - component: {fileID: 2132754281}
   - component: {fileID: 2132754280}
   - component: {fileID: 2132754282}
+  - component: {fileID: 2132754283}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -664,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 2132754274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.62, z: -6.39}
+  m_LocalPosition: {x: 0.03, y: 0.76, z: -6.39}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -754,7 +773,19 @@ MonoBehaviour:
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2132754280}
+        m_TargetAssemblyTypeName: PlayerMoveInputSystem, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -815,8 +846,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 3
+  rayRadius: 0.5
   renderers:
   - {fileID: 2132754277}
+--- !u!114 &2132754283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132754274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536df2a9d540bbd4daafbc71a440f5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPower: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

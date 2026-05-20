@@ -5,6 +5,9 @@ public class PlayerInvisibleChecker : MonoBehaviour
     [Header("Ray設定")]
     public float rayDistance = 3f;
 
+    [Header("Rayの太さ")]
+    public float rayRadius = 0.5f;
+
     [Header("プレイヤーRenderer")]
     public Renderer[] renderers;
 
@@ -17,12 +20,18 @@ public class PlayerInvisibleChecker : MonoBehaviour
 
     void CheckInvisibleFloor()
     {
-        Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        // 太いRay
+        if (Physics.SphereCast(
+            transform.position,
+            rayRadius,
+            Vector3.down,
+            out hit,
+            rayDistance))
         {
-            RandomInvisibleFloor3D area = hit.collider.GetComponent<RandomInvisibleFloor3D>();
+            RandomInvisibleFloor3D area =
+                hit.collider.GetComponent<RandomInvisibleFloor3D>();
 
             if (area != null)
             {
@@ -31,7 +40,6 @@ public class PlayerInvisibleChecker : MonoBehaviour
             }
         }
 
-        // 何も無かったら表示
         SetPlayerVisible(true);
     }
 
@@ -48,10 +56,15 @@ public class PlayerInvisibleChecker : MonoBehaviour
         }
     }
 
-    // SceneビューでRayを見えるようにする
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * rayDistance);
+
+        Vector3 start = transform.position;
+        Vector3 end = transform.position + Vector3.down * rayDistance;
+
+        Gizmos.DrawWireSphere(start, rayRadius);
+        Gizmos.DrawWireSphere(end, rayRadius);
+        Gizmos.DrawLine(start, end);
     }
 }
