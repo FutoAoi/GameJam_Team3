@@ -9,7 +9,7 @@ public class PlayerInvisibleChecker : MonoBehaviour
     public float rayRadius = 0.5f;
 
     [Header("プレイヤーRenderer")]
-    public Renderer[] renderers;
+    public GameObject[] _player;
 
     private bool isInvisible = true;
 
@@ -50,9 +50,9 @@ public class PlayerInvisibleChecker : MonoBehaviour
 
         isInvisible = visible;
 
-        foreach (Renderer rend in renderers)
+        foreach (GameObject player in _player)
         {
-            rend.enabled = visible;
+            player.SetActive(visible);
         }
     }
 
