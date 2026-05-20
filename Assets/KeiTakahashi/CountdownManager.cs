@@ -16,26 +16,33 @@ public class CountdownManager : MonoBehaviour
 
     IEnumerator CountdownRoutine()
     {
-        // 1. 最初は「3」を表示して、アニメーション
+        // 1. 最初は「3」を表示して、アニメーション！
         PlayTextWithAnimation("3");
         yield return new WaitForSeconds(1.0f); // 1秒待つ
 
-        // 2. 「2」を表示して、アニメーション
+        // 2. 「2」を表示して、アニメーション！
         PlayTextWithAnimation("2");
         yield return new WaitForSeconds(1.0f);
 
-        // 3. 「1」を表示して、アニメーション
+        // 3. 「1」を表示して、アニメーション！
         PlayTextWithAnimation("1");
         yield return new WaitForSeconds(1.0f);
 
-        // 4. 「Go!」を表示して、アニメーション
+        // 4. 「Go!」を表示して、アニメーション！
         PlayTextWithAnimation("Go!");
+
+        // ★追加：TimeManager（タイマー）を見つけて、タイマーをスタートさせる！
+        TimeManager timeManager = FindFirstObjectByType<TimeManager>();
+        if (timeManager != null)
+        {
+            timeManager.StartTimer();
+        }
 
         Debug.Log("ゲームスタート！");
         yield return new WaitForSeconds(1.0f);
 
-        // 5. 最後に文字をフェードアウト（ふわっと透明にする）して消す
-        // 0.3秒かけて文字の透明度を0（見えない状態）に
+        // 5. 最後に文字をフェードアウト（ふわっと透明にする）して消します
+        // 0.3秒かけて文字の透明度を0（見えない状態）にします
         countdownText.DOFade(0f, 0.3f);
     }
 
@@ -53,8 +60,6 @@ public class CountdownManager : MonoBehaviour
 
         // ② 【1行の魔法！】0.3秒かけて、元の大きさ「1倍」まで大きくします
         // うしろの .SetEase(Ease.OutBack) をつけることで、ちょっと行き過ぎてから戻る弾む動きになります
-        countdownText.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBack);
-
-
+        countdownText.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
     }
 }
