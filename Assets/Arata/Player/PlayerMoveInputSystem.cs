@@ -12,6 +12,8 @@ public class PlayerMoveInputSystem : MonoBehaviour
     [SerializeField] private float _jumpPower = 7f;
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private float _rotateSpeed = 1.0f;
+    [SerializeField] private AudioClip _walk;
+    [SerializeField] private AudioSource _source;
 
     private Rigidbody _rb;
     private Vector2 _moveInput;
@@ -20,6 +22,7 @@ public class PlayerMoveInputSystem : MonoBehaviour
     private Vector3 _moveDirection;
     private float _nowSpeed;
     private bool _isGrounded = true;
+    private AudioManager _audioManager;
 
     void Start()
     {
@@ -36,11 +39,23 @@ public class PlayerMoveInputSystem : MonoBehaviour
         );
         if(_moveDirection.magnitude > 0.1)
         {
+            if(!_isWalk)
+            {
+                _isWalk = true;
+                _source.Play();
+            }
             Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         }
-
+        else
+        {
+            if(_isWalk)
+            {
+                _isWalk = false;
+                _source.Stop();
+            }
+        }
         _playerAnimator.SetFloat("MoveSpeed", _moveDirection.magnitude);
     }
 

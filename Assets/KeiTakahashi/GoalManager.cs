@@ -24,7 +24,6 @@ public class GoalManager : MonoBehaviour
     // ゴールしたときの豪華な演出
     void PlayGoalEffects()
     {
-        Debug.Log("ゴール！おめでとう！");
 
         if (goalTextObject != null)
         {

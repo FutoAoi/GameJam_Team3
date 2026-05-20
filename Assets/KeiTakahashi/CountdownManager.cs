@@ -18,17 +18,21 @@ public class CountdownManager : MonoBehaviour
     {
         // 1. 最初は「3」を表示して、アニメーション！
         PlayTextWithAnimation("3");
+        AudioManager.Instance.PlaySe("Count");
         yield return new WaitForSeconds(1.0f); // 1秒待つ
 
         // 2. 「2」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Count");
         PlayTextWithAnimation("2");
         yield return new WaitForSeconds(1.0f);
 
         // 3. 「1」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Count");
         PlayTextWithAnimation("1");
         yield return new WaitForSeconds(1.0f);
 
         // 4. 「Go!」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Start");
         PlayTextWithAnimation("Go!");
 
         // ★追加：TimeManager（タイマー）を見つけて、タイマーをスタートさせる！
@@ -37,6 +41,7 @@ public class CountdownManager : MonoBehaviour
         {
             timeManager.SwichTimer();
             _moveInputSystem.CanMove = true;
+            AudioManager.Instance.PlayBGM("Ingame");
         }
 
         Debug.Log("ゲームスタート！");
