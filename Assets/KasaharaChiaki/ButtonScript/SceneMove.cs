@@ -20,6 +20,7 @@ public class SceneMove : MonoBehaviour
 
     [SerializeField] private GameObject _StageSerectPanel;
     [SerializeField] private bool _istitle= false;
+    [SerializeField] private GameObject _sousaPanael;
 
     // フェード移行したか記録
     private static bool isFade = false;
@@ -128,6 +129,27 @@ public class SceneMove : MonoBehaviour
             .OnComplete(() =>
             {
                 _StageSerectPanel.SetActive(false);
+            });
+    }
+    public void PopupSousaPanel()
+    {
+        _sousaPanael.SetActive(true);
+
+        // 最初小さくする
+        _sousaPanael.transform.localScale = Vector3.zero;
+
+        // 拡大アニメーション
+        _sousaPanael.transform.DOScale(1f, 0.3f)
+            .SetEase(Ease.OutBack);
+    }
+
+    public void CloseSousaPanel()
+    {
+        // 縮小してから消す
+        _sousaPanael.transform.DOScale(0f, 0.2f)
+            .OnComplete(() =>
+            {
+                _sousaPanael.SetActive(false);
             });
     }
 }

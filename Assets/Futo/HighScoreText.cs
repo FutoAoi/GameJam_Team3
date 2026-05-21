@@ -18,7 +18,7 @@ public class HighScoreText : MonoBehaviour
     {
         SetText();
     }
-    private void SetText()
+    public void SetText()
     {
         for(int i = 0; i < _manager.HighScores.Count; i++)
         {
