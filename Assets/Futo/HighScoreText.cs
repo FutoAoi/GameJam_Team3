@@ -34,6 +34,22 @@ public class HighScoreText : MonoBehaviour
         }
     }
 
+    public void ResetText()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            List1[i].text = "00:00:00";
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            List2[i].text = "00:00:00";
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            List3[i].text = "00:00:00";
+        }
+    }
+
     public string GetTimeString(float time)
     {
         _minutes = (int)(time / 60);

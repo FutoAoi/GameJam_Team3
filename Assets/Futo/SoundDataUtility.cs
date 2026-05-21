@@ -11,6 +11,7 @@ public static class SoundDataUtility
             public static readonly string Count = "Count";
             public static readonly string Start = "Start";
             public static readonly string Walk = "Walk";
+            public static readonly string Goal = "Goal";
         }
 
         public static class Bgm

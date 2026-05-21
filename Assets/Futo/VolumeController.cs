@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class VolumeController : MonoBehaviour
 {
-    [SerializeField] AudioMixer audioMixer;
+    [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider seSlider;
 
@@ -23,9 +23,7 @@ public class VolumeController : MonoBehaviour
     {
         float volume = Mathf.Lerp(-80f, 0f, value / 10f);
 
-        audioMixer.SetFloat("BGM", volume);
-
-        Debug.Log($"BGM:{volume}");
+        _audioMixer.SetFloat("BGM",volume);
     }
 
     //SE
@@ -33,8 +31,6 @@ public class VolumeController : MonoBehaviour
     {
         float volume = Mathf.Lerp(-80f, 0f, value / 10f);
 
-        audioMixer.SetFloat("SE", volume);
-
-        Debug.Log($"SE:{volume}");
+        _audioMixer.SetFloat("SE", volume);
     }
 }

@@ -56,9 +56,13 @@ public class GoalManager : MonoBehaviour
             // ③ 【超重要！】0.5秒かけて1倍に大きくする
             // ★うしろに「.SetUpdate(true)」をつけるのがポイント！
             // これをつけると、ゲームの時間を止めても、このアニメーションだけはフリーズせずに動いてくれます！
-            goalTextObject.transform.DOScale(1f, 0.5f)
+            goalTextObject.transform.DOScale(3f, 1f)
                 .SetEase(Ease.OutBack)
-                .SetUpdate(true).OnComplete(() => PopupResultPanel());
+                .SetUpdate(true).OnComplete(() =>
+                {
+                    PopupResultPanel();
+                    AudioManager.Instance.PlaySe("Goal");
+                });
         }
     }
 
