@@ -5,8 +5,8 @@ using DG.Tweening; // ★DOTweenの呪文を使うための「辞書」を開く
 
 public class CountdownManager : MonoBehaviour
 {
-    // 画面の文字（CountdownText）を合体させるための箱
-    public TextMeshProUGUI countdownText;
+    [SerializeField] private PlayerMoveInputSystem _moveInputSystem;
+    [SerializeField] private TextMeshProUGUI _countdownText;
 
     void Start()
     {
@@ -18,24 +18,30 @@ public class CountdownManager : MonoBehaviour
     {
         // 1. 最初は「3」を表示して、アニメーション！
         PlayTextWithAnimation("3");
+        AudioManager.Instance.PlaySe("Count");
         yield return new WaitForSeconds(1.0f); // 1秒待つ
 
         // 2. 「2」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Count");
         PlayTextWithAnimation("2");
         yield return new WaitForSeconds(1.0f);
 
         // 3. 「1」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Count");
         PlayTextWithAnimation("1");
         yield return new WaitForSeconds(1.0f);
 
         // 4. 「Go!」を表示して、アニメーション！
+        AudioManager.Instance.PlaySe("Start");
         PlayTextWithAnimation("Go!");
 
         // ★追加：TimeManager（タイマー）を見つけて、タイマーをスタートさせる！
         TimeManager timeManager = FindFirstObjectByType<TimeManager>();
         if (timeManager != null)
         {
-            timeManager.StartTimer();
+            timeManager.SwichTimer();
+            _moveInputSystem.CanMove = true;
+            AudioManager.Instance.PlayBGM("Ingame");
         }
 
         Debug.Log("ゲームスタート！");
@@ -43,23 +49,23 @@ public class CountdownManager : MonoBehaviour
 
         // 5. 最後に文字をフェードアウト（ふわっと透明にする）して消します
         // 0.3秒かけて文字の透明度を0（見えない状態）にします
-        countdownText.DOFade(0f, 0.3f);
+        _countdownText.DOFade(0f, 0.3f);
     }
 
     // ★文字をセットして、DOTweenで動かす
     void PlayTextWithAnimation(string newText)
     {
         // 画面の文字を書き換えます
-        countdownText.text = newText;
+        _countdownText.text = newText;
 
         // 文字の透明度を1（完全に見える状態）に戻しておきます（最後のフェードアウト対策）
-        countdownText.color = new Color(countdownText.color.r, countdownText.color.g, countdownText.color.b, 1f);
+        _countdownText.color = new Color(_countdownText.color.r, _countdownText.color.g, _countdownText.color.b, 1f);
 
         // ① 一度、文字の大きさを「0（点のように小さくて見えない状態）」にします
-        countdownText.transform.localScale = Vector3.zero;
+        _countdownText.transform.localScale = Vector3.zero;
 
         // ② 【1行の魔法！】0.3秒かけて、元の大きさ「1倍」まで大きくします
         // うしろの .SetEase(Ease.OutBack) をつけることで、ちょっと行き過ぎてから戻る弾む動きになります
-        countdownText.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        _countdownText.transform.DOScale(3f, 0.3f).SetEase(Ease.OutBack);
     }
 }

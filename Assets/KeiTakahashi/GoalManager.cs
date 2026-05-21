@@ -6,6 +6,13 @@ public class GoalManager : MonoBehaviour
 {
     // 画面の「GoalText」をハメ込むための箱
     public GameObject goalTextObject;
+    [SerializeField] private SceneMove _sceneMove;
+    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private HighScoreManager2 _scoreManager2;
+    [SerializeField] private HighScoreManager3 _scoreManager3;
+    [SerializeField] private HighScoreManager _scoreManager;
+    [SerializeField] private GameObject _resultPanel;
+    [SerializeField] private TMP_Text _resultText;
 
     private bool isGoal = false;
 
@@ -15,6 +22,19 @@ public class GoalManager : MonoBehaviour
         // まだゴールしていなくて、触った相手が「Player（プレイヤー）」だったら
         if (!isGoal && other.CompareTag("Player"))
         {
+            if(_scoreManager != null)
+            {
+                _scoreManager.AddScore(_timeManager.NowTime);
+            }
+            if (_scoreManager2 != null)
+            {
+                _scoreManager2.AddScore(_timeManager.NowTime);
+            }
+            if (_scoreManager3 != null)
+            {
+                _scoreManager3.AddScore(_timeManager.NowTime);
+            }
+            _resultText.text = _timeManager.GetTimeString();
             isGoal = true;
             PlayGoalEffects();
         }
@@ -23,7 +43,6 @@ public class GoalManager : MonoBehaviour
     // ゴールしたときの豪華な演出
     void PlayGoalEffects()
     {
-        Debug.Log("ゴール！おめでとう！");
 
         if (goalTextObject != null)
         {
@@ -38,10 +57,19 @@ public class GoalManager : MonoBehaviour
             // これをつけると、ゲームの時間を止めても、このアニメーションだけはフリーズせずに動いてくれます！
             goalTextObject.transform.DOScale(1f, 0.5f)
                 .SetEase(Ease.OutBack)
-                .SetUpdate(true);
+                .SetUpdate(true).OnComplete(() => PopupResultPanel());
         }
+    }
 
-        // ④ ゴールしたのでゲームの動きを一時停止する
-        Time.timeScale = 0f;
+    public void PopupResultPanel()
+    {
+        _resultPanel.SetActive(true);
+
+        // 最初小さくする
+        _resultPanel.transform.localScale = Vector3.zero;
+
+        // 拡大アニメーション
+        _resultPanel.transform.DOScale(1f, 0.3f)
+            .SetEase(Ease.OutBack);
     }
 }

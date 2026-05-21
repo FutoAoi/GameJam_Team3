@@ -18,6 +18,9 @@ public class SceneMove : MonoBehaviour
     [Header("オプションパネル")]
     public GameObject optionPanel;
 
+    [SerializeField] private GameObject _StageSerectPanel;
+    [SerializeField] private bool _istitle= false;
+
     // フェード移行したか記録
     private static bool isFade = false;
 
@@ -37,6 +40,10 @@ public class SceneMove : MonoBehaviour
             // 通常開始時は透明
             fadeImage.color = new Color(0, 0, 0, 0);
         }
+        if(_istitle)
+        {
+            AudioManager.Instance.PlayBGM("Title");
+        }
     }
 
     public void StartGame(string loadScene)
@@ -49,6 +56,7 @@ public class SceneMove : MonoBehaviour
         .OnComplete(() =>
         {
             SceneManager.LoadScene(loadScene);
+            AudioManager.Instance.StopBGM();
         });
     }
 
@@ -98,6 +106,28 @@ public class SceneMove : MonoBehaviour
             .OnComplete(() =>
             {
                 optionPanel.SetActive(false);
+            });
+    }
+    
+    public void PopupStageSerectPanel()
+    {
+        _StageSerectPanel.SetActive(true);
+
+        // 最初小さくする
+        _StageSerectPanel.transform.localScale = Vector3.zero;
+
+        // 拡大アニメーション
+        _StageSerectPanel.transform.DOScale(1f, 0.3f)
+            .SetEase(Ease.OutBack);
+    }
+
+    public void CloseStageSrectPanel()
+    {
+        // 縮小してから消す
+        _StageSerectPanel.transform.DOScale(0f, 0.2f)
+            .OnComplete(() =>
+            {
+                _StageSerectPanel.SetActive(false);
             });
     }
 }
