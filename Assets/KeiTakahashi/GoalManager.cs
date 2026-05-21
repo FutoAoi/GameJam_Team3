@@ -46,6 +46,7 @@ public class GoalManager : MonoBehaviour
 
         if (goalTextObject != null)
         {
+            _timeManager.SwichTimer();
             // ① 隠しておいた文字を画面に表示する！
             goalTextObject.SetActive(true);
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class AudioManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private int _sePoolSize = 10;
+    [SerializeField] private AudioMixerGroup _seMixerGroup;
 
     private readonly Queue<AudioSource> _seAudioSourcePools = new Queue<AudioSource>();
 
@@ -45,6 +47,7 @@ public class AudioManager : MonoBehaviour
             var instance = new GameObject("SeAudioSource_" + i, typeof(AudioSource));
             instance.transform.SetParent(_seRoot);
             instance.gameObject.SetActive(false);
+            instance.GetComponent<AudioSource>().outputAudioMixerGroup = _seMixerGroup;
             _seAudioSourcePools.Enqueue(instance.GetComponent<AudioSource>());
         }
 
