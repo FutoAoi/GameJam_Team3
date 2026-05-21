@@ -10,19 +10,19 @@ public class PlayerMoveInputSystem : MonoBehaviour
     [Header("Shiftダッシュ速度")]
     [SerializeField] private float _dashSpeed = 10f;
     [SerializeField] private float _jumpPower = 7f;
-    [SerializeField] private Animator _playerAnimator;
     [SerializeField] private float _rotateSpeed = 1.0f;
+    [SerializeField] private Animator _playerAnimator;
     [SerializeField] private AudioClip _walk;
     [SerializeField] private AudioSource _source;
 
+    private AudioManager _audioManager;
     private Rigidbody _rb;
     private Vector2 _moveInput;
+    private Vector3 _moveDirection;
     private bool _isDash;
     private bool _isWalk;
-    private Vector3 _moveDirection;
-    private float _nowSpeed;
     private bool _isGrounded = true;
-    private AudioManager _audioManager;
+    private float _nowSpeed;
 
     void Start()
     {

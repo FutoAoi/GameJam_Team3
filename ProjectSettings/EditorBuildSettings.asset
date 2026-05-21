@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/Futo/TitleScene.unity
     guid: fc6fdc2978cc3ae4ea03a47705f4c29e
   - enabled: 1
-    path: Assets/Futo/IngameScene.unity
+    path: Assets/Futo/Stage1.unity
     guid: b18cda3e712fbab43bc045498e04f883
   - enabled: 1
     path: Assets/Futo/ResultScene.unity
     guid: c30359b810059464b9f9c96982590146
+  - enabled: 1
+    path: Assets/Futo/Stage2.unity
+    guid: 25d3390f171bcaf419515f0b891bf0e9
+  - enabled: 1
+    path: Assets/Futo/Stage3.unity
+    guid: ae0541709b5d4d44986139065890a47e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 40d17d4873c1f3d4f8ba3029368a6734, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

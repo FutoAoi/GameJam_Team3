@@ -32,14 +32,14 @@ MonoBehaviour:
     _playOnAwake: 1
     _clip: {fileID: 8300000, guid: de8bc5c200fb5684a9df53fd2184be5d, type: 3}
   - _key: Count
-    _type: 0
-    _volume: 0.2
+    _type: 1
+    _volume: 0.071
     _isLoop: 0
     _playOnAwake: 1
     _clip: {fileID: 8300000, guid: 38827409f8ced6b49a9a06f7622ea43c, type: 3}
   - _key: Start
-    _type: 0
-    _volume: 0.1
+    _type: 1
+    _volume: 0.04
     _isLoop: 0
     _playOnAwake: 1
     _clip: {fileID: 8300000, guid: 044555dcd7721e7479c6eeae21d7d4c0, type: 3}
